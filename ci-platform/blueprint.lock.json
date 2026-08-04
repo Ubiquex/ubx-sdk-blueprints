@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "name": "ci-platform",
+  "files": {
+    "Ubxfile": "sha256:64f4449e50e878c40f68fb13444fe590596c64cf9ddfb191cb2d3a3dcd95ff17",
+    "bindings.go": "sha256:f78893cc2102c6e2094fec1add07b86e9f1d185e2dd414809a10d774b9b36fd3",
+    "ciplatform.go": "sha256:c4e1f3465f2481cc370c8f46f6b28019b888d089375ca2c0abd19aa97426cf64",
+    "go.mod": "sha256:c2374cc17a3ad3c2012c170ee95bf004d7bb9d907b17ec2b60d313229542e78b",
+    "go.sum": "sha256:49cde1d50b11a559a56a5ee61706c98aa9a36956ee9f335fb0ac896390fa85b8"
+  },
+  "content_hash": "sha256:6a120fff3bb22d769d3b0568ed01e30f535af25a14ee34af4f7969d333ee12de"
+}

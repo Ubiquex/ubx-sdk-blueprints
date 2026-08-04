@@ -1,0 +1,35 @@
+lang: go
+
+params:
+  repo_name: string, required
+  queue_name: string, required
+  retention_days: number, default 1
+
+resources: |
+  Infrastructure for our CI pipeline in eu-central-1. Note: the resource
+  slugs below (container-repo, pipeline-events, ci-runner, ci-runner-access)
+  are this template's own fixed internal identifiers, distinct from the
+  {repo_name}/{queue_name} attribute VALUES named inside each resource --
+  use the given slug as the resource's own name/identity, never the
+  parameter token itself. Use each provider's own real, standard attribute
+  names (e.g. "name") -- never invent a more descriptive synonym for a
+  real attribute.
+
+  1. An ECR repository, resource slug "container-repo", named
+     "{repo_name}", for container images. Enable image scanning on push.
+     Images should be immutable.
+
+  2. An SQS queue, resource slug "pipeline-events", named "{queue_name}",
+     for pipeline events. Standard queue. Its message retention period
+     attribute is measured in SECONDS, but {retention_days} is expressed
+     in DAYS -- convert it: the retention attribute's own value must be
+     "{retention_days * 86400}", not the raw {retention_days} token.
+
+  3. An IAM role, resource slug "ci-runner", named "ci-runner", that EC2
+     instances can assume.
+
+  4. A custom IAM policy, resource slug "ci-runner-access", named
+     "ci-runner-access", that allows:
+     - pushing and pulling images to/from the {repo_name} repository (only that one)
+     - sending messages to the {queue_name} queue (only that one)
+     Attach this policy to the ci-runner role.
