@@ -13,6 +13,10 @@ an `Ubxfile` + Go blueprint (`ciplatform.go`, `bindings.go`) with its own
   yet — until the founder confirms otherwise, treat it as PR-only, never
   self-merge, matching every repo in this org except `ubiquex` itself and
   `ubiquex-docs`.
+- Before pushing more commits to a branch with an open PR, confirm it is
+  STILL open (`gh pr list --state open` or `gh pr view <n>`) — a merged PR's
+  branch looks identical to any other from `git status` alone, and a push
+  after merge lands nowhere near `main`, silently.
 - NO AI attribution anywhere in commits or PR bodies.
 
 ## Before touching anything
