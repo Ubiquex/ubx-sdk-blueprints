@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "ubx:intent/v1",
+  "stack": "ci-platform",
+  "intent": {
+    "summary": "CI pipeline infrastructure: an ECR repository, an SQS queue, an IAM role EC2 instances can assume, and an IAM policy scoping that role to only this repository and this queue."
+  },
+  "resources": [
+    {
+      "type": "aws_ecr_repository",
+      "name": "container-repo",
+      "op": "create",
+      "config": {
+        "repository_name": "{repo_name}",
+        "image_scanning_configuration": {"scan_on_push": true},
+        "image_tag_mutability": "IMMUTABLE"
+      }
+    },
+    {
+      "type": "aws_sqs_queue",
+      "name": "pipeline-events",
+      "op": "create",
+      "config": {
+        "queue_name": "{queue_name}",
+        "message_retention_period": "{retention_days * 86400}"
+      }
+    },
+    {
+      "type": "aws_iam_role",
+      "name": "ci-runner",
+      "op": "create",
+      "config": {
+        "role_name": "ci-runner",
+        "assume_role_policy_document": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"ec2.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
+      }
+    },
+    {
+      "type": "aws_iam_policy",
+      "name": "ci-runner-access",
+      "op": "create",
+      "config": {
+        "policy_name": "ci-runner-access",
+        "policy_document": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":[\"ecr:GetDownloadUrlForLayer\",\"ecr:BatchGetImage\",\"ecr:BatchCheckLayerAvailability\",\"ecr:PutImage\",\"ecr:InitiateLayerUpload\",\"ecr:UploadLayerPart\",\"ecr:CompleteLayerUpload\"],\"Resource\":{\"$ref\":{\"to\":\"ci-platform.aws_ecr_repository.container-repo.arn\"}}},{\"Effect\":\"Allow\",\"Action\":[\"ecr:GetAuthorizationToken\"],\"Resource\":\"*\"},{\"Effect\":\"Allow\",\"Action\":[\"sqs:SendMessage\"],\"Resource\":{\"$ref\":{\"to\":\"ci-platform.aws_sqs_queue.pipeline-events.arn\"}}}]}",
+        "roles": [{"$ref": {"to": "ci-platform.aws_iam_role.ci-runner.role_name"}}]
+      }
+    }
+  ]
+}
