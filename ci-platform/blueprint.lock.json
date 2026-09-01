@@ -2,11 +2,12 @@
   "schema_version": 1,
   "name": "ci-platform",
   "files": {
-    "Ubxfile": "sha256:64f4449e50e878c40f68fb13444fe590596c64cf9ddfb191cb2d3a3dcd95ff17",
-    "bindings.go": "sha256:f78893cc2102c6e2094fec1add07b86e9f1d185e2dd414809a10d774b9b36fd3",
-    "ciplatform.go": "sha256:c4e1f3465f2481cc370c8f46f6b28019b888d089375ca2c0abd19aa97426cf64",
-    "go.mod": "sha256:c2374cc17a3ad3c2012c170ee95bf004d7bb9d907b17ec2b60d313229542e78b",
-    "go.sum": "sha256:49cde1d50b11a559a56a5ee61706c98aa9a36956ee9f335fb0ac896390fa85b8"
+    "Ubxfile": "sha256:98baebac457ea0b8ded08dcae88908f7acb1f49cf9b3953b1c087d7ac62a4914",
+    "go/bindings.go": "sha256:7f58680f1db271910eb81c89ac0de4fd85ff440db0c05ba83fbaae963c7acd92",
+    "go/ciplatform.go": "sha256:256ec9732e19c3e54602438dfbc1797b40452561c741243624bd95370351a826",
+    "go/go.mod": "sha256:d6f0e89d1ff45617ef8f08cabecc03ff3584b0562210ddacbb36b16f64776efe",
+    "go/go.sum": "sha256:a9b2cfdc9be26a44d1765428bf1d32f490f9409bfd3fc03552b3ca887034a392",
+    "resources.json": "sha256:cce236dcd7541021d8c619c03e2e0e99b4c938121d1d239869f5095f94df4359"
   },
-  "content_hash": "sha256:6a120fff3bb22d769d3b0568ed01e30f535af25a14ee34af4f7969d333ee12de"
+  "content_hash": "sha256:30760025b82be1bdc57c07d19b15f062d403b32d86aadec4954f504a0f5bdff2"
 }

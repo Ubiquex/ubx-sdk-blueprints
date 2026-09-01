@@ -6,7 +6,7 @@ import sdk "github.com/ubiquex/ubx-sdk-go/runtime"
 type ContainerRepoConfig struct {
 	ImageScanningConfiguration any
 	ImageTagMutability any
-	Name any
+	RepositoryName any
 }
 
 var ContainerRepo = sdk.ResourceBinding{
@@ -14,59 +14,52 @@ var ContainerRepo = sdk.ResourceBinding{
 	Fields: sdk.FieldMap{
 		"ImageScanningConfiguration": sdk.FieldSpec{WireName: "image_scanning_configuration"},
 		"ImageTagMutability": sdk.FieldSpec{WireName: "image_tag_mutability"},
-		"Name": sdk.FieldSpec{WireName: "name"},
+		"RepositoryName": sdk.FieldSpec{WireName: "repository_name"},
 	},
+	BlueprintName: "ci-platform",
 }
 
 type PipelineEventsConfig struct {
-	MessageRetentionSeconds any
-	Name any
+	MessageRetentionPeriod any
+	QueueName any
 }
 
 var PipelineEvents = sdk.ResourceBinding{
 	WireType: "aws_sqs_queue",
 	Fields: sdk.FieldMap{
-		"MessageRetentionSeconds": sdk.FieldSpec{WireName: "message_retention_seconds"},
-		"Name": sdk.FieldSpec{WireName: "name"},
+		"MessageRetentionPeriod": sdk.FieldSpec{WireName: "message_retention_period"},
+		"QueueName": sdk.FieldSpec{WireName: "queue_name"},
 	},
+	BlueprintName: "ci-platform",
 }
 
 type CiRunnerConfig struct {
-	AssumeRolePolicy any
-	Name any
+	AssumeRolePolicyDocument any
+	RoleName any
 }
 
 var CiRunner = sdk.ResourceBinding{
 	WireType: "aws_iam_role",
 	Fields: sdk.FieldMap{
-		"AssumeRolePolicy": sdk.FieldSpec{WireName: "assume_role_policy"},
-		"Name": sdk.FieldSpec{WireName: "name"},
+		"AssumeRolePolicyDocument": sdk.FieldSpec{WireName: "assume_role_policy_document"},
+		"RoleName": sdk.FieldSpec{WireName: "role_name"},
 	},
+	BlueprintName: "ci-platform",
 }
 
 type CiRunnerAccessConfig struct {
-	Name any
-	Policy any
+	PolicyDocument any
+	PolicyName any
+	Roles any
 }
 
 var CiRunnerAccess = sdk.ResourceBinding{
 	WireType: "aws_iam_policy",
 	Fields: sdk.FieldMap{
-		"Name": sdk.FieldSpec{WireName: "name"},
-		"Policy": sdk.FieldSpec{WireName: "policy"},
+		"PolicyDocument": sdk.FieldSpec{WireName: "policy_document"},
+		"PolicyName": sdk.FieldSpec{WireName: "policy_name"},
+		"Roles": sdk.FieldSpec{WireName: "roles"},
 	},
-}
-
-type CiRunnerAccessAttachmentConfig struct {
-	PolicyArn any
-	Role any
-}
-
-var CiRunnerAccessAttachment = sdk.ResourceBinding{
-	WireType: "aws_iam_role_policy_attachment",
-	Fields: sdk.FieldMap{
-		"PolicyArn": sdk.FieldSpec{WireName: "policy_arn"},
-		"Role": sdk.FieldSpec{WireName: "role"},
-	},
+	BlueprintName: "ci-platform",
 }
 
